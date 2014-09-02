@@ -1,17 +1,12 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import model.Matrix;
 
 /**
  * @author Nicolas Neubauer
@@ -23,7 +18,7 @@ public class InputPanel extends JPanel {
 	private JTextField harmonics = new JTextField();
 	private JTextField bits = new JTextField();
 	private JTextField bps = new JTextField();
-	private JTextField frequency = new JTextField();
+	private JTextField bandwidth = new JTextField();
 	// Buttons
 	private JButton addButton;
 	private JButton clearButton;
@@ -41,8 +36,8 @@ public class InputPanel extends JPanel {
 		return bps;
 	}
 
-	public JTextField getFrequency() {
-		return frequency;
+	public JTextField getBandwidth() {
+		return bandwidth;
 	}
 
 	/**
@@ -52,7 +47,7 @@ public class InputPanel extends JPanel {
 	public InputPanel() {
 		this.setLayout(new GridLayout(8, 0));
 		// Create Label
-		JLabel l = new JLabel("Matrix-Stack");
+		JLabel l = new JLabel("Display harmonics of a signal");
 		this.add(l, BorderLayout.NORTH);
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new BorderLayout());
@@ -65,14 +60,14 @@ public class InputPanel extends JPanel {
 		JLabel label3 = new JLabel("Bps:");
 		JPanel panel4 = new JPanel();
 		panel4.setLayout(new BorderLayout());
-		JLabel label4 = new JLabel("Frequency");
+		JLabel label4 = new JLabel("Bandwidth(Hz):");
 		panel1.add(harmonics, BorderLayout.CENTER);
 		panel1.add(label1, BorderLayout.NORTH);
 		panel2.add(bits, BorderLayout.CENTER);
 		panel2.add(label2, BorderLayout.NORTH);
 		panel3.add(bps, BorderLayout.CENTER);
 		panel3.add(label3, BorderLayout.NORTH);
-		panel4.add(frequency, BorderLayout.CENTER);
+		panel4.add(bandwidth, BorderLayout.CENTER);
 		panel4.add(label4, BorderLayout.NORTH);
 		this.add(panel1);
 		this.add(panel2);

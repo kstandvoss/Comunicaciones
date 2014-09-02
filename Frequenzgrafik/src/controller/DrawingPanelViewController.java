@@ -3,15 +3,17 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
-import controller.listener.KeyListener;
-import controller.listener.MoveListener;
+
+import javax.swing.JOptionPane;
+
 import model.Camera;
 import model.Vertex;
 import model.drawables.Curve;
 import model.drawables.DrawableObject;
 import view.DrawingPanelView;
-import view.InputPanel;
 import view.Renderer;
+import controller.listener.KeyListener;
+import controller.listener.MoveListener;
 
 /**
  * Der Controller, der eine DrawingPanelView verwaltet und das dazugehörige
@@ -39,7 +41,7 @@ public class DrawingPanelViewController {
 		drawableObjects = new LinkedList<DrawableObject>();
 		// Renderer initialisieren
 		// Zunächst Kamera festlegen
-		Vertex eyePoint = new Vertex(0, 0, -20, 1);
+		Vertex eyePoint = new Vertex(0, 10, -30, 1);
 		Vertex upVector = new Vertex(0, 1, 0, 1); // Einfach 1 hoeher als die
 		// Kamera
 		Vertex lookAtPoint = new Vertex(0, 0, 0, 1);
@@ -61,10 +63,16 @@ public class DrawingPanelViewController {
 		ActionListener addCurve = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setAll();
-				curve.create();
-				drawableObjects.add(curve);
-				getView().repaint();
+				if (setAll()) {
+					curve.create();
+					drawableObjects.add(curve);
+					getView().repaint();
+				}
+				else {
+					
+					JOptionPane.showMessageDialog(null, "Too many harmonics required for the given bandwidth and bps");
+					
+				}
 			}
 		};
 		drawingPanelView.getDrawingPanel().addMouseListener(m);
@@ -146,26 +154,30 @@ public class DrawingPanelViewController {
 				.getText()));
 	}
 
-	private void setF() {
-		curve.setFrequency(Integer.parseInt(drawingPanelView.getInputPanel()
-				.getFrequency().getText()));
+	private boolean setB() {
+		return (curve.setBandwidth(Integer.parseInt(drawingPanelView
+				.getInputPanel().getBandwidth().getText())));
 	}
 
 	private void setBits() {
 		String string = drawingPanelView.getInputPanel().getBits().getText();
 		String[] parts = string.split("");
 		boolean[] bits = new boolean[parts.length - 1];
+		int j = parts.length-2;
 		for (int i = 1; i < parts.length; i++) {
+			
 			if (parts[i].equals("1"))
-				bits[i - 1] = true;
+				bits[j] = true;
+			j--;
 		}
 		curve.setBits(bits);
 	}
 
-	private void setAll() {
+	private boolean setAll() {
 		setH();
 		setBits();
 		setBps();
-		setF();
+		return (setB());
+
 	}
 }

@@ -5,8 +5,8 @@ package model.drawables;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Face;
-import model.Vertex;
 
 /**
  * Basisklasse für zeichenbare 3D-Objekte
