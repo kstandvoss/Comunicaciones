@@ -8,20 +8,22 @@ public class Curve extends DrawableObject {
 	private int harmonic;
 	private double bps;
 	private double bandwidth;
+	private double intervall ;
 
 	// private double cn;
-	public Curve(boolean[] bits, int bandwidth, int harmonic, int bps) {
+	public Curve(boolean[] bits, int bandwidth, int harmonic, int bps, int intervall) {
 		super();
 		this.bits = bits;
 		this.bandwidth = bandwidth;
 		this.bps = bps;
 		this.harmonic = harmonic;
+		this.intervall = intervall;
 	}
 
 	public void create() {
 		faces.clear();
 		Face line;
-
+		
 		double[] next = new double[harmonic];
 		double[] last = new double[harmonic];
 		double[] an = new double[harmonic];
@@ -67,26 +69,27 @@ public class Curve extends DrawableObject {
 			dc[k] /= bits.length;
 
 			last[k] = dc[k] + an[k]
-					* Math.sin(2 * Math.PI * (k + 1) * getFrequency() * 8)
+					* Math.sin(2 * Math.PI * (k + 1) * getFrequency() * intervall)
 					+ bn[k]
-					* Math.cos(2 * Math.PI * (k + 1) * getFrequency() * 8);
+					* Math.cos(2 * Math.PI * (k + 1) * getFrequency() * intervall);
 
 		}
 
 		boolean firstRun = true;
 		double firstSum = 0;
 		double step = 0.001;
-		double width = -5.8;
-		double height = -17;
-		int factor = 2;
+		double factor = 16/intervall;
+		double width = -11.80/factor;
+		double height = -18;
+		
 
-		for (double i = step; i < 8; i += step) {
+		for (double i = step; i < intervall; i += step) {
 			for (int k = 0; k < harmonic; k++) {
 
 				next[k] = dc[k] + an[k]
-						* Math.sin(2 * Math.PI * (k + 1) * getFrequency() * (8-i))
+						* Math.sin(2 * Math.PI * (k + 1) * getFrequency() * (intervall-i))
 						+ bn[k]
-						* Math.cos(2 * Math.PI * (k + 1) * getFrequency() * (8-i));
+						* Math.cos(2 * Math.PI * (k + 1) * getFrequency() * (intervall-i));
 				line = new Face(new Vertex(factor * (i- step + width),
 						last[k], k  + 1 + height, 1), new Vertex(factor
 						* (i + width), next[k], k + 1 + height, 1));

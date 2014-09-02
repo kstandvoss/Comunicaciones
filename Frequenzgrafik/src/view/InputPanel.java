@@ -21,7 +21,7 @@ public class InputPanel extends JPanel {
 	private JTextField bandwidth = new JTextField();
 	// Buttons
 	private JButton addButton;
-	private JButton clearButton;
+	private JButton infoButton;
 	private JButton moveButton;
 
 	public JTextField getHarmonics() {
@@ -77,11 +77,12 @@ public class InputPanel extends JPanel {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BorderLayout());
 		addButton = new JButton("Create Curve");
-		// clearButton = new JButton("Change Parameter");
-		moveButton = new JButton("Move Fixpoint");
-		buttonPanel.add(addButton, BorderLayout.WEST);
-		// buttonPanel.add(clearButton, BorderLayout.CENTER);
-		buttonPanel.add(moveButton, BorderLayout.EAST);
+		infoButton = new JButton("Camera Info");
+		moveButton = new JButton("Move Camera");
+		buttonPanel.add(addButton, BorderLayout.NORTH);
+		
+		buttonPanel.add(moveButton, BorderLayout.CENTER);
+		buttonPanel.add(infoButton, BorderLayout.SOUTH);
 		this.add(buttonPanel);
 	}
 
@@ -95,8 +96,8 @@ public class InputPanel extends JPanel {
 	/**
 	 * @return the clearButton
 	 */
-	public JButton getClearButton() {
-		return clearButton;
+	public JButton getInfoButton() {
+		return infoButton;
 	}
 
 	public JButton getMoveButton() {

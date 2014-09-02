@@ -36,7 +36,7 @@ public class DrawingPanelViewController {
 	 */
 	public DrawingPanelViewController() {
 		boolean[] bits = new boolean[8];
-		curve = new Curve(bits, 0, 0, 0);
+		curve = new Curve(bits, 0, 0, 0, 0);
 		// Liste von 3D-Objekten initalisieren
 		drawableObjects = new LinkedList<DrawableObject>();
 		// Renderer initialisieren
@@ -70,17 +70,33 @@ public class DrawingPanelViewController {
 				}
 				else {
 					
-					JOptionPane.showMessageDialog(null, "Too many harmonics required for the given bandwidth and bps");
+					JOptionPane.showMessageDialog(null, "Too many " +
+							"harmonics required for the given bandwidth and bps");
 					
 				}
 			}
 		};
+		ActionListener info = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			
+					
+				JOptionPane.showMessageDialog(null, "Down: s\nUp: w\nRight: d\nLeft: a\n" +
+						"Forward: q\nBackward: e");
+					
+				
+			}
+		};
+		
+		
 		drawingPanelView.getDrawingPanel().addMouseListener(m);
 		drawingPanelView.getDrawingPanel().addMouseMotionListener(m);
 		drawingPanelView.addKeyListener(k);
 		drawingPanelView.getInputPanel().getMoveButton().addKeyListener(k);
 		drawingPanelView.getInputPanel().getAddButton()
 				.addActionListener(addCurve);
+		drawingPanelView.getInputPanel().getInfoButton()
+		.addActionListener(info);
 		// Neu rendern
 		this.getView().repaint();
 	}
@@ -139,10 +155,7 @@ public class DrawingPanelViewController {
 		return new Vertex(renderer.getCamera().getLookAtVector());
 	}
 
-	public void changeLookAtVector(Vertex d) {
-		renderer.getCamera().setLookAtPoint(d);
-		this.getView().repaint();
-	}
+
 
 	private void setH() {
 		curve.setHarmonic(Integer.parseInt(drawingPanelView.getInputPanel()
@@ -157,6 +170,11 @@ public class DrawingPanelViewController {
 	private boolean setB() {
 		return (curve.setBandwidth(Integer.parseInt(drawingPanelView
 				.getInputPanel().getBandwidth().getText())));
+	}
+	
+	private boolean setI() {
+		return (curve.setIntervall(Integer.parseInt(drawingPanelView
+				.getInputPanel().getIntervall().getText())));
 	}
 
 	private void setBits() {
@@ -177,7 +195,17 @@ public class DrawingPanelViewController {
 		setH();
 		setBits();
 		setBps();
+		setIntervall();
 		return (setB());
 
+	}
+
+	public void changeEyePoint(Vertex eyePoint) {
+		renderer.getCamera().setEyePoint(eyePoint);
+		this.getView().repaint();
+	}
+	public void changeLookAtVector(Vertex d) {
+		renderer.getCamera().setLookAtPoint(d);
+		this.getView().repaint();
 	}
 }
