@@ -76,7 +76,7 @@ public class DrawingPanelViewController {
 				}
 			}
 		};
-		ActionListener info = new ActionListener() {
+/*		ActionListener info = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			
@@ -86,7 +86,7 @@ public class DrawingPanelViewController {
 					
 				
 			}
-		};
+		};*/
 		
 		
 		drawingPanelView.getDrawingPanel().addMouseListener(m);
@@ -95,8 +95,7 @@ public class DrawingPanelViewController {
 		drawingPanelView.getInputPanel().getMoveButton().addKeyListener(k);
 		drawingPanelView.getInputPanel().getAddButton()
 				.addActionListener(addCurve);
-		drawingPanelView.getInputPanel().getInfoButton()
-		.addActionListener(info);
+		//drawingPanelView.getInputPanel().getInfoButton().addActionListener(info);
 		// Neu rendern
 		this.getView().repaint();
 	}
@@ -171,10 +170,10 @@ public class DrawingPanelViewController {
 		return (curve.setBandwidth(Integer.parseInt(drawingPanelView
 				.getInputPanel().getBandwidth().getText())));
 	}
-	
-	private boolean setI() {
-		return (curve.setIntervall(Integer.parseInt(drawingPanelView
-				.getInputPanel().getIntervall().getText())));
+
+	private void setI() {
+		curve.setIntervall(Double.parseDouble(drawingPanelView
+				.getInputPanel().getIntervall().getText()));
 	}
 
 	private void setBits() {
@@ -195,7 +194,7 @@ public class DrawingPanelViewController {
 		setH();
 		setBits();
 		setBps();
-		setIntervall();
+		setI();
 		return (setB());
 
 	}

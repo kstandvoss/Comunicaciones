@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,8 +22,9 @@ public class InputPanel extends JPanel {
 	private JTextField bandwidth = new JTextField();
 	// Buttons
 	private JButton addButton;
-	private JButton infoButton;
+	//private JButton infoButton;
 	private JButton moveButton;
+	private JTextField intervall = new JTextField();
 
 	public JTextField getHarmonics() {
 		return harmonics;
@@ -38,6 +40,11 @@ public class InputPanel extends JPanel {
 
 	public JTextField getBandwidth() {
 		return bandwidth;
+	}
+
+	public JTextField getIntervall() {
+
+		return intervall;
 	}
 
 	/**
@@ -60,6 +67,9 @@ public class InputPanel extends JPanel {
 		JLabel label3 = new JLabel("Bps:");
 		JPanel panel4 = new JPanel();
 		panel4.setLayout(new BorderLayout());
+		JLabel label5 = new JLabel("Intervall(seconds):");
+		JPanel panel5 = new JPanel();
+		panel5.setLayout(new BorderLayout());
 		JLabel label4 = new JLabel("Bandwidth(Hz):");
 		panel1.add(harmonics, BorderLayout.CENTER);
 		panel1.add(label1, BorderLayout.NORTH);
@@ -69,20 +79,33 @@ public class InputPanel extends JPanel {
 		panel3.add(label3, BorderLayout.NORTH);
 		panel4.add(bandwidth, BorderLayout.CENTER);
 		panel4.add(label4, BorderLayout.NORTH);
+		panel5.add(intervall, BorderLayout.CENTER);
+		panel5.add(label5, BorderLayout.NORTH);
 		this.add(panel1);
 		this.add(panel2);
 		this.add(panel3);
 		this.add(panel4);
+		this.add(panel5);
 		// Buttons
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BorderLayout());
 		addButton = new JButton("Create Curve");
-		infoButton = new JButton("Camera Info");
+	//	infoButton = new JButton("Camera Info");
 		moveButton = new JButton("Move Camera");
-		buttonPanel.add(addButton, BorderLayout.NORTH);
+
+		moveButton.setToolTipText("Up: w Down: s Right: d Left: a" +
+				" Forward: q Backward: e");
+		intervall.setToolTipText("Intervall in which the signal is displayed");
+		harmonics.setToolTipText("Requested amount of harmonics");
+		bits.setToolTipText("Requested signal");
+		bps.setToolTipText("Requested bits per second to be transmitted");
+		bandwidth.setToolTipText("Requested bandwidth");
 		
+		
+		buttonPanel.add(addButton, BorderLayout.NORTH);
 		buttonPanel.add(moveButton, BorderLayout.CENTER);
-		buttonPanel.add(infoButton, BorderLayout.SOUTH);
+		//buttonPanel.add(infoButton, BorderLayout.SOUTH);
+		
 		this.add(buttonPanel);
 	}
 
@@ -92,16 +115,13 @@ public class InputPanel extends JPanel {
 	public JButton getAddButton() {
 		return addButton;
 	}
-
-	/**
-	 * @return the clearButton
-	 */
-	public JButton getInfoButton() {
+	/*public JButton getInfoButton() {
 		return infoButton;
-	}
+	}*/
 
 	public JButton getMoveButton() {
 		// TODO Auto-generated method stub
 		return moveButton;
 	}
+
 }

@@ -183,4 +183,8 @@ public class Curve extends DrawableObject {
 	public void setBps(int bps) {
 		this.bps = bps;
 	}
+
+	public void setIntervall(double d) {
+		this.intervall = d;
+	}
 }

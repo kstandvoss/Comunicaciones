@@ -28,8 +28,9 @@ public class App {
 		frame.pack();
 		frame.setSize(1366, 768);
 		frame.setVisible(true);
-		JOptionPane.showMessageDialog(null, "Displays signal in an intervall of 8 seconds.\n"
-				+ " If T(bits/bps) is bigger , you won't see the whole signal. \n"
-				+ "If T is smaller, the signal repeats itself.");
+		JOptionPane.showMessageDialog(null, "Displays signal in the requested intervall.\n"
+				+ " If T(bits/bps) is bigger than the intervall, you won't see the whole signal. \n"
+				+ "If T is smaller, the signal repeats itself(not necessarily completely.\n"
+				+ "Use tooltips for help !");
 	}
 }
